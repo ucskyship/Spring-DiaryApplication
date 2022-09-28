@@ -44,7 +44,11 @@ public class UserServiceImpl implements iUserService {
     public RegisterDiaryResponse addDiary(RegisterDiaryRequest request) throws UserNotFoundException, DiaryAlreadyExistException {
         var diary = diaryService.registerUserDiary(request);
         var user = findUserByUserName(request.getUserName());
+
         user.setDiary(diary);
+//        if (diary.getDiaryName() != null) {
+//                throw new DiaryNotUnique("cannot create diary user not unique");
+//            }
         userRepository.save(user);
 
         RegisterDiaryResponse response = new RegisterDiaryResponse();

@@ -5,4 +5,6 @@ import lombok.Data;
 @Data
 public class RegisterDiaryResponse {
     private String message;
+
+    private String userName;
 }

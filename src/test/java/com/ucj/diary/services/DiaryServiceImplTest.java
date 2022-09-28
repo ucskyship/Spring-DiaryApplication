@@ -6,7 +6,6 @@ import com.ucj.diary.data.dtos.requests.UpdateDiaryRequest;
 import com.ucj.diary.exceptions.DiaryAlreadyExistException;
 import com.ucj.diary.exceptions.DiaryNotFoundException;
 import com.ucj.diary.exceptions.EntryAlreadyExistException;
-import com.ucj.diary.exceptions.UserNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +18,13 @@ class DiaryServiceImplTest {
 
     @BeforeEach
     void setUp() {
+//        userService.deleteAll();
         diaryService.deleteAll();
     }
 
     @Autowired
     private iDiaryService diaryService;
+    private iUserService userService;
 
     @Test
     void registerDiary() throws DiaryNotFoundException, DiaryAlreadyExistException {
@@ -54,7 +55,7 @@ class DiaryServiceImplTest {
     }
 
     @Test
-    void findDiaryById() throws DiaryAlreadyExistException, DiaryNotFoundException, UserNotFoundException {
+    void findDiaryById() throws DiaryAlreadyExistException, DiaryNotFoundException {
         RegisterDiaryRequest request = new RegisterDiaryRequest();
         request.setDiaryName("ucjDiary");
         var response = diaryService.registerUserDiary(request);
@@ -64,7 +65,7 @@ class DiaryServiceImplTest {
     }
 
     @Test
-    void findByDiaryName() throws DiaryAlreadyExistException, DiaryNotFoundException, UserNotFoundException {
+    void findByDiaryName() throws DiaryAlreadyExistException, DiaryNotFoundException {
         RegisterDiaryRequest request = new RegisterDiaryRequest();
         request.setDiaryName("ucjDiary");
         diaryService.registerUserDiary(request);
@@ -74,7 +75,7 @@ class DiaryServiceImplTest {
     }
 
     @Test
-    void updateDiary() throws DiaryAlreadyExistException, DiaryNotFoundException, UserNotFoundException {
+    void updateDiary() throws DiaryAlreadyExistException, DiaryNotFoundException {
         RegisterDiaryRequest request = new RegisterDiaryRequest();
         request.setDiaryName("myDiary");
         diaryService.registerUserDiary(request);
@@ -90,7 +91,7 @@ class DiaryServiceImplTest {
     }
 
     @Test
-    void deleteDiary() throws DiaryAlreadyExistException, DiaryNotFoundException, UserNotFoundException {
+    void deleteDiary() throws DiaryAlreadyExistException, DiaryNotFoundException {
         RegisterDiaryRequest request = new RegisterDiaryRequest();
         request.setDiaryName("myDiary");
 
@@ -103,7 +104,7 @@ class DiaryServiceImplTest {
     }
 
     @Test
-    void deleteAllDiary() throws DiaryAlreadyExistException, UserNotFoundException {
+    void deleteAllDiary() throws DiaryAlreadyExistException {
         RegisterDiaryRequest request = new RegisterDiaryRequest();
         request.setDiaryName("myDiary");
         diaryService.registerUserDiary(request);
@@ -130,7 +131,7 @@ class DiaryServiceImplTest {
     }
 
     @Test
-    void throwsDiaryNotFoundException() throws DiaryAlreadyExistException, DiaryNotFoundException, UserNotFoundException {
+    void throwsDiaryNotFoundException() throws DiaryAlreadyExistException {
         RegisterDiaryRequest request = new RegisterDiaryRequest();
         request.setDiaryName("myDiary");
         diaryService.registerUserDiary(request);

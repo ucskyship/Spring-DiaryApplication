@@ -14,7 +14,6 @@ import com.ucj.diary.exceptions.DiaryNotUnique;
 import com.ucj.diary.utils.MapperPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +24,6 @@ public class DiaryServiceImpl implements iDiaryService {
     private DiaryRepository diaryRepository;
     @Autowired
     private EntryServiceImpl entryService;
-
     private List<Entry> entries = new ArrayList<>();
 
     @Override
@@ -33,9 +31,6 @@ public class DiaryServiceImpl implements iDiaryService {
         for (var foundDiary : diaryRepository.findAll()) {
             if (foundDiary.getDiaryName().equals(request.getDiaryName())) {
                 throw new DiaryAlreadyExistException("diary already exist");
-            }
-            if (foundDiary.getDiaryName() != null) {
-                throw new DiaryNotUnique("cannot create diary user not unique");
             }
         }
         Diary diary = new Diary();
